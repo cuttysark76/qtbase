@@ -580,6 +580,7 @@ void QEvdevTouchScreenData::reportPoints()
             tp.pressure = tp.state == Qt::TouchPointReleased ? 0 : 1;
         else
             tp.pressure = (tp.pressure - hw_pressure_min) / qreal(hw_pressure_max - hw_pressure_min);
+        qDebug() << "evdevtouch: touch point state: " << tp.state;
     }
 
     QWindowSystemInterface::handleTouchEvent(0, m_device, m_touchPoints);
