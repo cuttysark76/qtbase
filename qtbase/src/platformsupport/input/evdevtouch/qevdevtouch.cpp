@@ -353,6 +353,7 @@ err:
 
 void QEvdevTouchScreenData::processInputEvent(input_event *data)
 {
+    qDebug() << "evdevtouch: data->type " << data->type;
     if (data->type == EV_ABS) {
 
         if (data->code == ABS_MT_POSITION_X) {
@@ -580,7 +581,7 @@ void QEvdevTouchScreenData::reportPoints()
             tp.pressure = tp.state == Qt::TouchPointReleased ? 0 : 1;
         else
             tp.pressure = (tp.pressure - hw_pressure_min) / qreal(hw_pressure_max - hw_pressure_min);
-        qDebug() << "evdevtouch: touch point state: " << tp.state;
+        qDebug() << "evdevtouch: state: " << tp.state << "count: " << pointCount;
     }
 
     QWindowSystemInterface::handleTouchEvent(0, m_device, m_touchPoints);
