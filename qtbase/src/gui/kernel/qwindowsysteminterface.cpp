@@ -468,6 +468,8 @@ void QWindowSystemInterface::TouchEventFilter::deliverTouchEvent(QWindow *w, ulo
     QEvent::Type type;
     QList<QTouchEvent::TouchPoint> touchPoints = QWindowSystemInterfacePrivate::convertTouchPoints(points, &type);
 
+    qDebug() << "touched me: " << type;
+
     QWindowSystemInterfacePrivate::TouchEvent *e =
             new QWindowSystemInterfacePrivate::TouchEvent(w, timestamp, type, device, touchPoints, mods);
     QWindowSystemInterfacePrivate::handleWindowSystemEvent(e);
