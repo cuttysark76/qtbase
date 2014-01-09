@@ -304,8 +304,8 @@ const QSet<QString>& CppCodeParser::topicCommands()
                        << COMMAND_QMLATTACHEDSIGNAL
                        << COMMAND_QMLMETHOD
                        << COMMAND_QMLATTACHEDMETHOD
-                       << COMMAND_QMLBASICTYPE
-                       << COMMAND_QMLMODULE;
+                       << COMMAND_QMLBASICTYPE;
+//                       << COMMAND_QMLMODULE;
     }
     return topicCommands_;
 }
@@ -489,11 +489,13 @@ Node* CppCodeParser::processTopicCommand(const Doc& doc,
         dn->setLocation(doc.startLocation());
         return dn;
     }
+#if 0
     else if (command == COMMAND_QMLMODULE) {
         DocNode* dn = qdb_->addQmlModule(arg.first);
         dn->setLocation(doc.startLocation());
         return dn;
     }
+#endif
     else if (command == COMMAND_PAGE) {
         Node::PageType ptype = Node::ArticlePage;
         QStringList args = arg.first.split(QLatin1Char(' '));

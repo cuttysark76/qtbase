@@ -95,7 +95,7 @@ QString Generator::sinceTitles[] =
 };
 QStringList Generator::styleDirs;
 QStringList Generator::styleFiles;
-bool Generator::debugging_ = false;
+bool Generator::debugging_ = true;
 bool Generator::noLinkErrors_ = false;
 bool Generator::redirectDocumentationToDevNull_ = false;
 Generator::Passes Generator::qdocPass_ = Both;
@@ -1013,9 +1013,18 @@ void Generator::generateInnerNode(InnerNode* node)
         }
     }
 
+    qDebug() << "zDEBUG: fn:" << fileName(node);
     NodeList::ConstIterator c = node->childNodes().constBegin();
     while (c != node->childNodes().constEnd()) {
-        if ((*c)->isInnerNode() && (*c)->access() != Node::Private) {
+        qDebug() << "zDEBUG:" << "childNode:";
+        qDebug() << "zDEBUG: fn:" << fileName((*c));
+        qDebug() << "zDEBUG:" << (*c)->isInnerNode();
+        qDebug() << "zDEBUG:" << "access():";
+        qDebug() << "zDEBUG:" << (*c)->access();
+        qDebug() << "zDEBUG:" << "isInnerNode():";
+        qDebug() << "zDEBUG:" << (*c)->isInnerNode();
+        qDebug() << "zDEBUG:" << "done";
+        if ((*c) && (*c)->isInnerNode() && (*c)->access() != Node::Private) {
             generateInnerNode((InnerNode*)*c);
         }
         ++c;
